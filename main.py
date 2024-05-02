@@ -32,6 +32,16 @@ def main():
                 else:
                     break
             deposit_funds(iban,float(amount))
+        elif choice == 4:
+            while True:
+                iban = input("Please enter your IBAN: ")
+                if iban not in accounts:
+                    print("Invalid IBAN")
+                else:
+                    break
+            for i,v in accounts.items():
+                if i == iban:
+                    print(f"{v['name']},Your Balance Is {v['balance']}")
         elif choice == 6:
             while True:
                 loan_amount = input("Please enter the Loan Amount: ")
