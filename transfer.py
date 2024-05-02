@@ -14,14 +14,7 @@ def transfer(sender, receiver, amount):
         return accounts
     else:
         print('Not enough balance')
-        return 
         
-print(accounts['TB0016']['amount'])
-
-balance_history={:[]}
-transfer_history={}
-tr=f'{sender} transferred {amount}₾ to {receiver}'
-
 
 def add_balance_history(iban, history):
     balance_history[iban].append(history)
