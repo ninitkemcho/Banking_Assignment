@@ -15,6 +15,9 @@ def main():
                     break           
             unique_IBAN = generate_unique_IBAN()
             add_account(name, amount, unique_IBAN)
+            transaction_history[unique_IBAN] = []
+            balance_history[unique_IBAN] = []
             print(f"Account added successfully with IBAN: {unique_IBAN}")
+
 if __name__ == "__main__":
     main()
