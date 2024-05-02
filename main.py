@@ -65,5 +65,98 @@ def main():
         elif choice == 7:
             exit("Goodbye")
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        elif choice==3:
+            while True:
+                sender=input("Enter sender's IBAN: ")
+                if sender not in accounts:
+                    print('Invalid IBAN')
+                else:
+                    break
+
+            while True:
+                receiver=input("Enter receiver's IBAN: ")
+                if receiver not in accounts:
+                    print('Invalid IBAN')
+                else:
+                    break
+
+            while True:
+                amount=input("Enter amount to transfer: ")
+                if amount.replace('.','',1).isdigit():
+                    amount=float(amount)
+                else:
+                    print('Enter valid number')
+                    continue
+                
+                if accounts[sender]['amount']<amount:
+                    print("Not enough balance")
+                    continue
+                else:
+                    break
+
+            transfer(sender, receiver, amount)
+            print(f'Succesfully transfered {amount}₾ from {sender} to {receiver}')
+            
+
+        elif choice==5:
+            while True:
+                iban=input('Enter IBAN to check history: ')
+                if iban not in accounts:
+                    print('Enter valid IBAN')
+                else:
+                    break
+            
+            category=input('Add filter type (balance/transfer/both): ')
+
+            if category=="both":
+                if iban in transaction_history:
+                    for transaction in transaction_history[iban]:
+                        print(transaction)
+                if iban in balance_history:
+                    for balance in balance_history[iban]:
+                        print(balance)
+            elif category=='balance':
+                if iban in balance_history:
+                    for balance in balance_history[iban]:
+                        print(balance)
+            else:
+                if iban in transaction_history:
+                    for transaction in transaction_history[iban]:
+                        print(transaction)
+    
+                
+                
+
+
 if __name__ == "__main__":
     main()
