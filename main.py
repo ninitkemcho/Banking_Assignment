@@ -1,4 +1,5 @@
 from functions import *
+from transfer import transfer
 def main():
     while True:
         menu = ["1. Create bank account", "2. Add balance", "3. Transfer money", "4. Account details", "5. Account history", "6. Loan calculator", "7. Exit"]
@@ -42,6 +43,31 @@ def main():
             for i,v in accounts.items():
                 if i == iban:
                     print(f"{v['name']},Your Balance Is {v['balance']}")
+        elif choice==5:
+            while True:
+                iban=input('Enter IBAN to check history: ')
+                if iban not in accounts:
+                    print('Enter valid IBAN')
+                else:
+                    break
+            
+            category=input('Add filter type (balance/transfer/both): ')
+
+            if category=="both":
+                if iban in transaction_history:
+                    for transaction in transaction_history[iban]:
+                        print(transaction)
+                if iban in balance_history:
+                    for balance in balance_history[iban]:
+                        print(balance)
+            elif category=='balance':
+                if iban in balance_history:
+                    for balance in balance_history[iban]:
+                        print(balance)
+            else:
+                if iban in transaction_history:
+                    for transaction in transaction_history[iban]:
+                        print(transaction)
         elif choice == 6:
             while True:
                 loan_amount = input("Please enter the Loan Amount: ")
