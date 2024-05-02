@@ -1,7 +1,7 @@
 from functions import *
 def main():
     while True:
-        menu = ["1. Create bank account", "2. Control balance", "3. Transfer money", "4. Account details", "5. Account history", "6. Loan calculator", "7. Exit"]
+        menu = ["1. Create bank account", "2. Add balance", "3. Transfer money", "4. Account details", "5. Account history", "6. Loan calculator", "7. Exit"]
         for i in menu:
             print(i)
         choice = int(input("Enter number: "))
@@ -18,6 +18,52 @@ def main():
             transaction_history[unique_IBAN] = []
             balance_history[unique_IBAN] = []
             print(f"Account added successfully with IBAN: {unique_IBAN}")
+        elif choice == 2:
+            while True:
+                iban = input("Please enter your IBAN: ")
+                if iban not in accounts:
+                    print("Invalid IBAN")
+                else:
+                    break
+            while True:
+                amount = input("Please enter the amount to deposit: ")
+                if not amount.replace('.','',1).isdigit():
+                    print("Invalid Amount")
+                else:
+                    break
+            deposit_funds(iban,float(amount))
+        elif choice == 4:
+            while True:
+                iban = input("Please enter your IBAN: ")
+                if iban not in accounts:
+                    print("Invalid IBAN")
+                else:
+                    break
+            for i,v in accounts.items():
+                if i == iban:
+                    print(f"{v['name']},Your Balance Is {v['balance']}")
+        elif choice == 6:
+            while True:
+                loan_amount = input("Please enter the Loan Amount: ")
+                
+                if not loan_amount.replace('.','',1).isdigit():
+                    print("Invalid Amount!")
+                else:
+                    loan_amount = float(loan_amount)
+                    break
+            while True:
+                iban = input("Please enter your IBAN: ")
+                if iban not in accounts:
+                    print("Invalid IBAN")
+                else:
+                    break
+            calculate_loan(iban,loan_amount)
+            print(accounts)
+
+
+        
+        elif choice == 7:
+            exit("Goodbye")
 
 if __name__ == "__main__":
     main()
