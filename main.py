@@ -1,5 +1,5 @@
 from functions import *
-from transfer import transfer
+
 def main():
     while True:
         menu = ["1. Create bank account", "2. Add balance", "3. Transfer money", "4. Account details", "5. Account history", "6. Loan calculator", "7. Exit"]
@@ -33,6 +33,9 @@ def main():
                 else:
                     break
             deposit_funds(iban,float(amount))
+            print(f'{amount} added to {iban}')
+            bal=f'{amount} added to {iban}'
+            add_balance_history(iban,bal)
         elif choice==3:
             while True:
                 sender=input("Enter sender's IBAN: ")
@@ -115,10 +118,10 @@ def main():
                 else:
                     break
             calculate_loan(iban,loan_amount)
-            print(accounts)
+            print(f'{loan_amount} added to {iban}')
+            bal=f'{loan_amount} added to {iban}'
+            add_balance_history(iban,bal)
 
-
-        
         elif choice == 7:
             exit("Goodbye")
 if __name__ == "__main__":

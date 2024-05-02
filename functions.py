@@ -45,3 +45,25 @@ def calculate_loan(iban, loan_amount):
         accounts[iban]['balance'] += loan_amount
         add_transaction(iban, "Loan", loan_amount)
         print("Loan amount added to your account balance.")
+
+def transfer(sender, receiver, amount):
+    if accounts[sender]['amount']-amount>=0:
+        for iban in accounts:
+            if iban==sender:
+                accounts[sender]['amount']-=amount
+            elif iban==receiver:
+                accounts[receiver]['amount']+=amount
+        tr=f'{sender} transferred {amount}₾ to {receiver}'
+        add_transaction_history(sender, tr)
+        add_transaction_history(receiver, tr)
+        return accounts
+    else:
+        print('Not enough balance')
+        
+def add_balance_history(iban, history):
+    balance_history[iban].append(history)
+    return balance_history
+
+def add_transaction_history(iban, history):
+    transaction_history[iban].append(history)
+    return transaction_history
