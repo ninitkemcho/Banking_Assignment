@@ -1,12 +1,4 @@
-import random
-from functions import add_account, accounts
-def generate_unique_IBAN():
-    while True:
-        iban = 'TB' 
-        for i in range(4):
-            iban+=random.choice('0123456789')
-        if iban not in accounts:
-            return iban       
+from functions import *
 def main():
     while True:
         menu = ["1. Create bank account", "2. Control balance", "3. Transfer money", "4. Account details", "5. Account history", "6. Loan calculator", "7. Exit"]
