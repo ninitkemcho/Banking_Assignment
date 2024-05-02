@@ -26,12 +26,30 @@ def main():
                 else:
                     break
             while True:
-                amount = input("Please enter the amount to deposit! ")
+                amount = input("Please enter the amount to deposit: ")
                 if not amount.replace('.','',1).isdigit():
                     print("Invalid Amount")
                 else:
                     break
-            deposit_funds(iban,int(amount))
+            deposit_funds(iban,float(amount))
+        elif choice == 6:
+            while True:
+                loan_amount = input("Please enter the Loan Amount: ")
+                
+                if not loan_amount.replace('.','',1).isdigit():
+                    print("Invalid Amount!")
+                else:
+                    loan_amount = float(loan_amount)
+                    break
+            while True:
+                iban = input("Please enter your IBAN: ")
+                if iban not in accounts:
+                    print("Invalid IBAN")
+                else:
+                    break
+            calculate_loan(iban,loan_amount)
+            print(accounts)
+
 
         
         elif choice == 7:
