@@ -1,10 +1,7 @@
 accounts={"TB0016": {'name':"Nini", 'surname': 'Tkemaladze', 'amount': 0},
           "TB0008": {'name':"Nicolas", 'surname': 'Tsagareli', 'amount': 0}}
 
-
 def transfer(sender, receiver, amount):
-    enough_balance
-    sender_exists
     if accounts[sender]['amount']-amount>=0:
         for iban in accounts:
             if iban==sender:
@@ -12,8 +9,8 @@ def transfer(sender, receiver, amount):
             elif iban==receiver:
                 accounts[receiver]['amount']+=amount
         tr=f'{sender} transferred {amount}₾ to {receiver}'
-        history['sender'].append(tr)
-        
+        add_transfer_history(sender, tr)
+        add_transfer_history(receiver, tr)
         return accounts
     else:
         print('Not enough balance')
@@ -21,9 +18,15 @@ def transfer(sender, receiver, amount):
         
 print(accounts['TB0016']['amount'])
 
-history={}
-history={:{balance:[],transfer:[],}}
+balance_history={:[]}
+transfer_history={}
 tr=f'{sender} transferred {amount}₾ to {receiver}'
 
-history['TB0008']={}
-history['TB0008']['transfer']=[tr]
+
+def add_balance_history(iban, history):
+    balance_history[iban].append(history)
+    return balance_history
+
+def add_transfer_history(iban, history):
+    transfer_history[iban].append(history)
+    return transfer_history
