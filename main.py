@@ -18,6 +18,8 @@ def main():
             transaction_history[unique_IBAN] = []
             balance_history[unique_IBAN] = []
             print(f"Account added successfully with IBAN: {unique_IBAN}")
+        elif choice == 7:
+            exit("Goodbye")
 
 if __name__ == "__main__":
     main()
