@@ -134,6 +134,8 @@ def main():
             append_history_to_txt(iban)
 
         elif choice == 7:
+            with open("transactions.txt", 'w'):
+                pass
             exit("Goodbye")
 if __name__ == "__main__":
     main()
