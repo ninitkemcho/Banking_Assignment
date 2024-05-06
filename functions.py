@@ -1,6 +1,6 @@
 import random
 
-accounts = {"TB500": {"name": "Giorgi", "balance": 500}}
+accounts = {}
 transaction_history = {}
 balance_history = {}
 
@@ -8,7 +8,7 @@ def add_account(name, amount, unique_IBAN):
     accounts[unique_IBAN] = {'name': name, 'balance': amount}
     transaction_history[unique_IBAN] = []
     add_transaction(unique_IBAN, "Deposit", amount)
-
+    
 def add_transaction(iban, transaction_type, amount):
     if iban in transaction_history:
         transaction_history[iban].append({"type": transaction_type, "amount": amount})

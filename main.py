@@ -6,6 +6,7 @@ def main():
         for i in menu:
             print(i)
         choice = int(input("Enter number: "))
+        
         if choice == 1:
             name = input("To create account, enter your name: ")
             while True:
@@ -18,8 +19,9 @@ def main():
             add_account(name, amount, unique_IBAN)
             append_history_to_txt(unique_IBAN)
             transaction_history[unique_IBAN] = []
-            balance_history[unique_IBAN] = []
+            balance_history[unique_IBAN] = [f"{unique_IBAN} filled with {amount}₾"]
             print(f"Account added successfully with IBAN: {unique_IBAN}")
+            
         elif choice == 2:
             while True:
                 iban = input("Please enter your IBAN: ")
@@ -36,8 +38,9 @@ def main():
             deposit_funds(iban,float(amount))
             append_history_to_txt(iban)
             print(f'{amount} added to {iban}')
-            bal=f'{amount} added to {iban}'
+            bal=f'{iban} filled with {amount}₾'
             add_balance_history(iban,bal)
+            
         elif choice==3:
             while True:
                 sender=input("Enter sender's IBAN: ")
@@ -66,11 +69,12 @@ def main():
                     continue
                 else:
                     break
-
+                
             transfer(sender, receiver, amount)
             append_history_to_txt(sender)
             append_history_to_txt(receiver)
             print(f'Succesfully transfered {amount}₾ from {sender} to {receiver}')
+            
         elif choice == 4:
             while True:
                 iban = input("Please enter your IBAN: ")
@@ -81,6 +85,7 @@ def main():
             for i,v in accounts.items():
                 if i == iban:
                     print(f"{v['name']},Your Balance Is {v['balance']}")
+                    
         elif choice==5:
             while True:
                 iban=input('Enter IBAN to check history: ')
@@ -106,6 +111,7 @@ def main():
                 if iban in transaction_history:
                     for transaction in transaction_history[iban]:
                         print(transaction)
+                        
         elif choice == 6:
             while True:
                 loan_amount = input("Please enter the Loan Amount: ")
