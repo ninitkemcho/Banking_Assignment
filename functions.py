@@ -1,6 +1,6 @@
 import random
 
-accounts = {}
+accounts = {"TB500": {"name": "Giorgi", "balance": 500}}
 transaction_history = {}
 balance_history = {}
 
@@ -47,12 +47,12 @@ def calculate_loan(iban, loan_amount):
         print("Loan amount added to your account balance.")
 
 def transfer(sender, receiver, amount):
-    if accounts[sender]['amount']-amount>=0:
+    if accounts[sender]['balance']-amount>=0:
         for iban in accounts:
             if iban==sender:
-                accounts[sender]['amount']-=amount
+                accounts[sender]['balance']-=amount
             elif iban==receiver:
-                accounts[receiver]['amount']+=amount
+                accounts[receiver]['balance']+=amount
         tr=f'{sender} transferred {amount}₾ to {receiver}'
         add_transaction_history(sender, tr)
         add_transaction_history(receiver, tr)
@@ -67,3 +67,8 @@ def add_balance_history(iban, history):
 def add_transaction_history(iban, history):
     transaction_history[iban].append(history)
     return transaction_history
+
+def append_history_to_txt(iban):
+    text = f"{accounts[iban]['name']}, {iban}, {accounts[iban]['balance']}\n"
+    with open("transactions.txt", 'a') as file:
+        file.write(text)

@@ -16,6 +16,7 @@ def main():
                     break           
             unique_IBAN = generate_unique_IBAN()
             add_account(name, amount, unique_IBAN)
+            append_history_to_txt(unique_IBAN)
             transaction_history[unique_IBAN] = []
             balance_history[unique_IBAN] = []
             print(f"Account added successfully with IBAN: {unique_IBAN}")
@@ -33,6 +34,7 @@ def main():
                 else:
                     break
             deposit_funds(iban,float(amount))
+            append_history_to_txt(iban)
             print(f'{amount} added to {iban}')
             bal=f'{amount} added to {iban}'
             add_balance_history(iban,bal)
@@ -59,13 +61,15 @@ def main():
                     print('Enter valid number')
                     continue
                 
-                if accounts[sender]['amount']<amount:
+                if accounts[sender]['balance']<amount:
                     print("Not enough balance")
                     continue
                 else:
                     break
 
             transfer(sender, receiver, amount)
+            append_history_to_txt(sender)
+            append_history_to_txt(receiver)
             print(f'Succesfully transfered {amount}₾ from {sender} to {receiver}')
         elif choice == 4:
             while True:
