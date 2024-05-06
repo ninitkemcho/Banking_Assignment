@@ -125,6 +125,7 @@ def main():
             print(f'{loan_amount} added to {iban}')
             bal=f'{loan_amount} added to {iban}'
             add_balance_history(iban,bal)
+            append_history_to_txt(iban)
 
         elif choice == 7:
             exit("Goodbye")
