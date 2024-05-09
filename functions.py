@@ -1,4 +1,5 @@
 import random
+from datetime import datetime
 
 accounts = {}
 transaction_history = {}
@@ -77,7 +78,7 @@ def add_user_to_csv(name,iban,balance):
     with open("users.csv", "a") as file:
         file.write(text)
 def add_transaction_to_transactioncsv(sender,receiver,amount):
-    text = f"From {sender}, to {receiver}, {amount}\n"
+    text = f"From {sender}, to {receiver}, {amount}, {datetime.now()}\n"
     with open("transaction.csv", 'a') as file:
         file.write(text)
 
