@@ -72,3 +72,16 @@ def append_history_to_txt(iban):
     text = f"{accounts[iban]['name']}, {iban}, {accounts[iban]['balance']}\n"
     with open("transactions.txt", 'a') as file:
         file.write(text)
+def add_user_to_csv(name,iban,balance):
+    text = f"{iban}, {name}, {balance}\n"
+    with open("users.csv", "a") as file:
+        file.write(text)
+def add_transaction_to_transactioncsv(sender,receiver,amount):
+    text = f"From {sender}, to {receiver}, {amount}\n"
+    with open("transaction.csv", 'a') as file:
+        file.write(text)
+
+def clear_file(filename):
+    with open(filename, "w"):
+        pass
+

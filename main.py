@@ -1,4 +1,5 @@
 from functions import *
+import csv
 
 def main():
     while True:
@@ -18,6 +19,8 @@ def main():
             unique_IBAN = generate_unique_IBAN()
             add_account(name, amount, unique_IBAN)
             append_history_to_txt(unique_IBAN)
+            add_user_to_csv(name,unique_IBAN,amount)
+
             transaction_history[unique_IBAN] = []
             balance_history[unique_IBAN] = [f"{unique_IBAN} filled with {amount}₾"]
             print(f"Account added successfully with IBAN: {unique_IBAN}")
@@ -73,6 +76,7 @@ def main():
             transfer(sender, receiver, amount)
             append_history_to_txt(sender)
             append_history_to_txt(receiver)
+            add_transaction_to_transactioncsv(sender,receiver,amount)
             print(f'Succesfully transfered {amount}₾ from {sender} to {receiver}')
             
         elif choice == 4:
@@ -134,8 +138,9 @@ def main():
             append_history_to_txt(iban)
 
         elif choice == 7:
-            with open("transactions.txt", 'w'):
-                pass
+            clear_file("transactions.txt")
+            clear_file("transaction.csv")
+            clear_file("users.csv")
             exit("Goodbye")
 if __name__ == "__main__":
     main()
