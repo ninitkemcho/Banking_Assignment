@@ -41,11 +41,16 @@ def calculate_loan(iban, loan_amount):
     LOAN_INTEREST_RATE = 0.082  # Fixed loan interest rate (8.2%)
     total_payable = loan_amount * (1 + LOAN_INTEREST_RATE)
     print(f"Total payable amount (including interest): {total_payable} GEL")
-    confirm_loan = input("Do you want to proceed with the loan? (y/n) ")
-    if confirm_loan.lower() == "y":
+    confirm_loan = input("Do you want to proceed with the loan? (yes/no) ")
+    if confirm_loan.lower() == "yes":
         accounts[iban]['balance'] += loan_amount
         add_transaction(iban, "Loan", loan_amount)
-        print("Loan amount added to your account balance.")
+        print(f"{loan_amount} added to your account balance.")
+        bal=f'{loan_amount} added to {iban}'
+        add_balance_history(iban,bal)
+        append_history_to_txt(iban)
+    else:
+        print("Loan cancelled")
 
 def transfer(sender, receiver, amount):
     if accounts[sender]['balance']-amount>=0:
